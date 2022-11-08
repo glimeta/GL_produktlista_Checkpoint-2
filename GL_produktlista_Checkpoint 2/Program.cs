@@ -1,46 +1,4 @@
-﻿
-
-class Category
-{ 
-    public string Category Name {get; set;}
-
-    public Category(string name);
-    {
-        Category Name = name; 
-    }
-}
-
-class Product
-{
-    public Category Category {get; set;}
-    public string Item {get; set;}
-    public int Price {get; set;}
-
-    public Product(string category, string item, int price)
-    {
-        Category = category;
-        Item     = item;
-        Price    = price;
-    }    
-}
-
-class Price
-{
-    public int Price {get; set;};
-
-    public Price(int price)
-    {
-        Price = price;    
-    }
-
-    
-
-}
-
-
-
-
-{ 
+ 
 static void Main(string[] args)
 
 {  bool hasError = false;
@@ -126,10 +84,5 @@ Console.ForegroundColor = ConsoleColor.White;
      Console.WriteLine("Press enter to continue...");
      Console.ReadLine();
 
-    }
-}
 
 
-
-
-    
