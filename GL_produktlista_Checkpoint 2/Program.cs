@@ -110,7 +110,7 @@ while (true)
             Console.WriteLine(item.Category.CategoryName.PadRight(30) + item.Product.PadRight(30) + item.Price);
         }
 
-  int sum = items.Sum(item => item.Price);     //Coman that gives a sum of product prices
+  int sum = items.Sum(item => item.Price);     //Command that gives a sum of product prices
   Console.ForegroundColor = ConsoleColor.Green;
   Console.WriteLine("Sum: ".PadRight(50) + sum);
 
