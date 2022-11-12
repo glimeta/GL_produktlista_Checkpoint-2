@@ -1,6 +1,7 @@
 ﻿using System;
 
-class Price
+class PriceDataCheck 
+
 {
     public int Price { get; set; };
 
@@ -9,6 +10,16 @@ class Price
         Price = price;
     }
 
+    bool isValue = int.TryParse(priceInput, out value);
+    if (!isValue)
+          {
+            Console.WriteLine("Incorrect price!");
+          }
+      else
+
+          {
+             break;
+          }
 
 
 }

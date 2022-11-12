@@ -1,10 +1,11 @@
 ﻿using System;
 
-pclass Category
+public class Category
 {
     public string CategoryName { get; set; }
 
-public Category(string name);
-{
-    CategoryName = name;
+public Category(string categoryName);
+  {
+    CategoryName = categoryName;
+  }
 }

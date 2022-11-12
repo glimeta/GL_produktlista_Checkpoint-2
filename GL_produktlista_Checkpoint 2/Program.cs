@@ -1,88 +1,134 @@
- 
-static void Main(string[] args)
 
-{  bool hasError = false;
-   int index = 0;
-s  tring[] info = new string[0];
-   
+using GL_produktlista_Checkpoint_2;
+using System.Data;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
-    While (True)
-      {
-        Console.WriteLine("GL_mini project_checkpoint 2");
-        Console.WriteLine("Follow instuctions to enter new product. Press "Q" to quit.");
+
+Console.WriteLine("GL_mini project_checkpoint 2");
+Console.WriteLine("Follow instuctions to enter new product. Press 'Q' to quit.");
+List<Item> items = new List<Item> ();
+
+while (true) 
+
+{
+    while (true)
+    {
         Console.ForegroundColor = ConsoleColor.White;
-        
         Console.WriteLine("Enter a Category");
-        string data1 = Console.ReadLine(Category);
+        string dataCat = Console.ReadLine();
+        if (dataCat.Trim().ToLower() == "q")
+         {
+            break;
+         }
         
-        Console.WriteLine("Enter a Name");
-        string data2 = Console.ReadLine(Product);
-       
-        Console.WriteLine("Enter a Price");
-        string data3 = Console.ReadLine(Price);
+        if (String.IsNullOrEmpty(dataCat))
+         {
+            Console.WriteLine("Incorrect Entry. Data missing");
+            continue;
+         }
 
-    if (data1.Trim().ToLower() == "q")  (data2.Trim().ToLower() == "q") || (data3.Trim().ToLower() == "q")
+        string dataProd;    
+        while (true)                          //while loop needed to make program continue if conditions are not met, to next step user price 
+          {
+            Console.WriteLine("Enter a Product Name");
+            dataProd = Console.ReadLine();
+            if (dataProd.Trim().ToLower() == "q")
+             {
+                break;
+             }
+
+            if (String.IsNullOrEmpty(dataProd))
+               {
+                Console.WriteLine("Incorrect Entry. Data missing");
+               }
+
+            else                               //break commnand to make program continue if conditions are not met, to next step user price 
+            {
+                break;
+               }
+          }
+        
+        
+        string dataPrice;       // this should be declared outside the loop for break command in the end for dataPrice 
+        int value = 0;
+        while (true)
+          {
+            Console.WriteLine("Enter a Price");      //This should be in the loop until correct entry is done.
+            dataPrice = Console.ReadLine();
+
+            if (dataPrice.Trim().ToLower() == "q")
+              {                                     
+                 break;
+              }
+
+            if (String.IsNullOrEmpty(dataPrice))
+              {
+               Console.WriteLine("Incorrect Entry. Data missing");
+               continue;
+
+              }
+
+            bool Number = int.TryParse(dataPrice, out value);
+            if (!Number)
+              {                                                                 ////brackets should be indented
+                Console.WriteLine("Incorrect price! Input must be a number");
+              }
+            else
+              {
+                break;
+              }
+          }
+
+        if (dataProd.Trim().ToLower() == "q")   
         {
             break;
         }
 
-        if (String.IsNullOrEmpty(data1) && (String.IsNullOrEmpty(data2) && (String.IsNullOrEmpty(data3)
+        if (dataPrice.Trim().ToLower() == "q")
+           {
+          break;
+           }
+
+      Console.WriteLine("Correct Entry!");
+      Item item = new Item(dataCat, dataProd, value);
+      items.Add(item);
+    }
+
+  Console.WriteLine("-----------");
+  Console.WriteLine("you have entered following products ");      
+
+  List<Item> sortedItems = items.OrderBy(item => item.Price).ToList();
+
+  Console.ForegroundColor = ConsoleColor.Yellow;
+  Console.WriteLine("Category".PadRight(30) + "Product Name".PadRight(30) + "Price");
+
+     foreach (Item item in sortedItems)
         {
-            Console.WriteLine("Incorrect Entry. Data missing");
-            hasError = true;
-        }                            
-
-        
-            foreach (char c in data1) || (char c in data2)
-
-            // here we declared and set req. for char c
-            {
-                if (!char.IsLetter(c))  // if char c is not a letter
-                {
-                    hasError = true;
-                }
-            }
-
-                if (hasError)
-                   {
-                    Console.WriteLine("Incorrect Entry. Data must not be a number."); 
-                   }
-
-                if (!hasError)
-                   {
-                    Array.Resize(ref info, index + 1);
-                    info[index] = data.ToUpper();
-                    index++;
-                    Console.WriteLine("Correct Entry!");
-                   }
+            //This command lays out user data in gategory and columns
+            Console.WriteLine(item.Category.CategoryName.PadRight(30) + item.Product.PadRight(30) + item.Price);
         }
- 
 
+  int sum = items.Sum(item => item.Price);     //Coman that gives a sum of product prices
+  Console.ForegroundColor = ConsoleColor.Green;
+  Console.WriteLine("Sum: ".PadRight(50) + sum);
 
+  Console.WriteLine("");
+  Console.ForegroundColor = ConsoleColor.White;
 
-Console.WriteLine("-----------");
-Console.WriteLine("you have entered following products ");
-Console.WriteLine("Category".PadRight(20) + "Product".PadRight(20) + "Price");
-  for (int i = 0; i < info.Length; i++)
-   {
-    Console.WriteLine(info[i]);
-   }
+  Console.WriteLine("Press enter to continue or 'q' to exit");
 
-Array.Sort(Product);
-Console.ForegroundColor = ConsoleColor.Green;
-Console.WriteLine("-----------");
-Console.WriteLine("sorterade produkter");
-for (int i = 0; i < info.Length; i++)
-{
-  Console.WriteLine(info[i]);
-}
+  string answer = Console.ReadLine();
+   if (answer.ToLower().Trim() == "q")
+      {
+         break;
+      }
 
-int sum = items.Sum(item => item.Price);
-Console.WriteLine("Sum: ".PadRight(40) + sum);
+}  
 
-Console.ForegroundColor = ConsoleColor.White;
-     Console.WriteLine("Press enter to continue...");
-     Console.ReadLine();
+Console.ReadLine();
+
 
 
 
